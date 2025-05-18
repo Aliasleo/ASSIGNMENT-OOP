@@ -45,7 +45,40 @@ public class ProductOperation extends Product {
         return null;
     }
     public void generateCategoryFigure(){
+        /**
+        * Generates a bar chart showing the total number of products
+        * for each category in descending order.
+        * Saves the figure into the data/figure folder.
+        */
         
+    }
+    public void generateDiscountFigure(){
+        /**
+        * Generates a pie chart showing the proportion of products that have
+        * a discount value less than 30, between 30 and 60 inclusive,
+        * and greater than 60.
+        * Saves the figure into the data/figure folder.
+        */
+        
+    }
+    public void generateLikesCountFigure(){
+        /**
+        * Generates a chart displaying the sum of products' likes_count
+        * for each category in ascending order.
+        * Saves the figure into the data/figure folder.
+        */
+
+    }
+    public void generateDiscountLikesCountFigure(){
+        /**
+        * Generates a scatter chart showing the relationship between
+        * likes_count and discount for all products.
+        * Saves the figure into the data/figure folder.
+        */
+        
+    }
+    public void deleteAllProducts(){
+        allProducts.clear();
     }
 }
 

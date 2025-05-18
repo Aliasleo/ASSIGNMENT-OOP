@@ -34,6 +34,17 @@ public class ProductOperation extends Product {
         }
         System.out.println("Found " + matchingProducts.size() + "matching products.");
         return matchingProducts;
+
+    }
+    public Product getProductById(String productId) {
+        for (Product product : allProducts) {
+            if (product.getproId().equals(productId)) {
+                return product;
+            }
+        }
+        return null;
+    }
+    public void generateCategoryFigure(){
         
     }
 }

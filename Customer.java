@@ -1,5 +1,3 @@
-package ModelClass;
-
 public class Customer extends User {
     public String userEmail;
     public String userMobile;

@@ -14,12 +14,23 @@ public class Main {
         switch (action) {
             case "1":
                 // Handle login
+                String[] loginInput = ioInterface.getUserInput("Please enter your username and password:", 2);
+                String username = loginInput[0];
+                String password = loginInput[1];
+                
                 break;
             case "2":
                 // Handle registration
+                String[] registerInput = ioInterface.getUserInput("Please enter your username, password, email, and mobile number:", 4);
+                String regUsername = registerInput[0];
+                String regPassword = registerInput[1];
+                String email = registerInput[2];
+                String mobile = registerInput[3];
+                // Validate the inputs
                 break;
             case "3":
                 // Handle quit
+                ioInterface.printMessage("Exiting the application. Goodbye!");
                 break;
             default:
                 ioInterface.printErrorMessage("Invalid Input", "Please select a valid option.");

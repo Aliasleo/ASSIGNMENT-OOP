@@ -1,4 +1,3 @@
-package Operation;
 import java.util.Random;
 import java.io.File;
 import java.util.Scanner;
@@ -74,7 +73,10 @@ public class UserOperation extends User {
         if (!file.exists()) {
             System.out.println("File users.txt không tồn tại.");
             return null;
+        }
+
+        // TODO: Implement actual login logic here (e.g., check username and password from file)
+        // For now, return null to satisfy return type requirement.
+        return null;
     }
-
-
 }

@@ -1,4 +1,3 @@
-package Operation;
 import java.util.Random;
 
 public class UserOperation {

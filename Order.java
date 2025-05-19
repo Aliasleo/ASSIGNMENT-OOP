@@ -1,4 +1,4 @@
-package ModelClass;
+import java.util.List;
 
 public class Order {
     private String orderId;
@@ -11,6 +11,17 @@ public class Order {
         this.userId = userId;
         this.proId = proId;
         this.orderId = orderId;
+    }
+    private List<Product> productList;
+
+    // existing constructors, methods...
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 
     public void setorderId(String orderId){
@@ -26,7 +37,7 @@ public class Order {
         this.orderTime = orderTime;
     }
 
-    public String getorderId(String orderId){
+    public String getOrderId(String orderId){
        return orderId;
     }
     public String getuserId(String userId){

@@ -1,4 +1,10 @@
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class OrderOperation {
+    private static OrderOperation instance; // Singleton instance
+
     public static OrderOperation getInstance() {
         if (instance == null) {
             instance = new OrderOperation();
@@ -14,7 +20,8 @@ public class OrderOperation {
             System.out.println("Order is null.");
             return false;
         }
-        if (order.getOrderId() == null || order.getOrderId().isEmpty()) {
+        String orderId = order.getOrderId("o_12345");
+        if (orderId == null || orderId.isEmpty()) {
             System.out.println("Order ID is null or empty.");
             return false;
         }
@@ -22,9 +29,11 @@ public class OrderOperation {
             System.out.println("Product list is null or empty.");
             return false;
         }
-        System.out.println("customerID: " + order.getCustomerId());
-        System.out.println("productID: " + product.getProductId());
-        System.out.println("createTime: " + order.getCreateTime());
+        System.out.println("customerID: " + order.getuserId("u_1234567890"));
+        for (Product product : order.getProductList()) {
+            System.out.println("productID: " + product.getproId());
+        }
+        System.out.println("createTime: " + order.getorderTime("DD-MM-YYYY_HH:MM:SS"));
         // Add logic to save the order to a database or file
         return true;
     }
@@ -38,7 +47,7 @@ public class OrderOperation {
         // Add logic to delete the order from a database or file
         return true;
     }
-    public OrderListResult getOrderList(String customerId, int pageNumber) {
+    /*public OrderListResult getOrderList(String customerId, int pageNumber) {
         final int itemsPerPage=10;
         if (customerId == null || customerId.trim().isEmpty()) {
             System.out.println("Warning: customerId is null or empty. Returning empty list.");
@@ -53,7 +62,7 @@ public class OrderOperation {
         int totalPages = (int) Math.ceil((double) totalCustomerOrders / itemsPerPage);//ceil(x) lam tron ve so nguyen gan nhat
         return new OrderListResult(pageNumber, totalPages, customerId);
         //NEED HELP
-    }
+    }*/
     public void generateTestOrderData(){
         /**
     * Automatically generates test data including customers and orders.

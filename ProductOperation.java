@@ -14,7 +14,14 @@ public class ProductOperation extends Product {
         return productOperation;
     }
     public void extractProductsFromFile() {}
-    public ProductListResult getProductList(int pageNumber){}
+    public static class ProductListResult {
+        // Add fields and methods as needed
+    }
+
+    public ProductListResult getProductList(int pageNumber){
+        // Implement the method as needed
+        return null;
+    }
     public boolean deleteProduct(String productId) {
         return false;
     }

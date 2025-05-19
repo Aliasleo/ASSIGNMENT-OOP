@@ -1,5 +1,3 @@
-package ModelClass;
-
 public class Product {
     private String proId;
     private String proModel;

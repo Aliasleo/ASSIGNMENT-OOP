@@ -1,3 +1,5 @@
+package ModelClass;
+
 public class User {
     private String userid;
     private String userName;

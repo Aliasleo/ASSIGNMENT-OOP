@@ -36,9 +36,9 @@ public class UserOperation {
     }
 
 
-    public String decryptedPassword (String encrypted){
-        if (!encrypted.startsWith("^^") || !encrypted.endsWith("$$")) return null;
-        String core = encrypted.substring(2, encrypted.length() - 2);
+    public String decryptedPassword (String encryptedPassword){
+        if (!encryptedPassword.startsWith("^^") || !encryptedPassword.endsWith("$$")) return null;
+        String core = encryptedPassword.substring(2, encryptedPassword.length() - 2);
         StringBuilder password = new StringBuilder();
 
         for(int i=0;i<core.length();i+=3){

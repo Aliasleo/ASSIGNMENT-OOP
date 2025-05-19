@@ -1,3 +1,5 @@
+package ModelClass;
+
 public class Customer extends User {
     public String userEmail;
     public String userMobile;
@@ -23,8 +25,15 @@ public class Customer extends User {
     public void setUserMobile(String userMobile) {
         this.userMobile = userMobile;
     }
+   
     @Override
     public String toString() { 
-        return "{\"user_id\":\"" + userid + "\", \"user_name\":\"" + userName + "\", \"user_password\":\"" + userPassword + "\", \"user_register_time\":\"" + userRegisterTime + "\",\"user_role\":\"" + userRole + "\",\"user_email\":\"" + userEmail + "\",\"user_mobile\":\"" + userMobile + "\"}";
+        return "{\"user_id\":\"" + getUserId() +
+                "\", \"user_name\":\"" + getUserName() +
+                "\", \"user_password\":\"" + getUserPassword() +
+                "\", \"user_register_time\":\"" + getUserRegisterTime() +
+                "\", \"user_role\":\"" + getUserRole() +
+                "\", \"user_email\":\"" + userEmail +
+                "\", \"user_mobile\":\"" + userMobile + "\"}";
     }
 }

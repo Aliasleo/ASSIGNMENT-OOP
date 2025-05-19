@@ -1,4 +1,4 @@
-
+package ModelClass;
 
 public class Product {
     private String proId;

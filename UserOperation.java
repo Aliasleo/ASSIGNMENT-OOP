@@ -1,6 +1,9 @@
+package Operation;
 import java.util.Random;
+import java.io.File;
+import java.util.Scanner;
 
-public class UserOperation {
+public class UserOperation extends User {
     private static UserOperation instance = null;
     private UserOperation(){} // constructor private -> ko tajo nhieeuf ddoois tuowngj
     
@@ -45,5 +48,33 @@ public class UserOperation {
         }
         return password.toString();
     }
+
+    public boolean validateUsername(String userName) {
+        if (userName == null) return false;
+        return userName.matches("^[a-zA-Z_]{5,}$"); //bắt đầu và kết thúc bằng các ký tự a–z, A–Z, hoặc _, ít nhất 5 ký tự.
+    }
+
+    public boolean validatePassword(String userPassword) {
+        if (userPassword == null || userPassword.length() < 5) return false;
+
+        boolean hasLetter = false;
+        boolean hasDigit = false;
+
+        for (char ch : userPassword.toCharArray()) {
+            if (Character.isLetter(ch)) hasLetter = true;
+            if (Character.isDigit(ch)) hasDigit = true;
+        }
+
+        return hasLetter && hasDigit;
+    }
+
+    public User login(String userName, String userPassword) {
+        File file = new File("data/users.txt");
+
+        if (!file.exists()) {
+            System.out.println("File users.txt không tồn tại.");
+            return null;
+    }
+
 
 }

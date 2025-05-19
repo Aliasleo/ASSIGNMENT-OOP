@@ -1,9 +1,11 @@
+package Operation;
+
 public class User {
-    protected String userid;
-    protected String userName;
-    protected String userPassword;
-    protected String userRegisterTime;
-    protected String userRole;
+    private String userid;
+    private String userName;
+    private String userPassword;
+    private String userRegisterTime;
+    private String userRole;
 
     public User(String userid, String userName, String userPassword, String userRegisterTime, String userRole) {
         this.userid = userid;

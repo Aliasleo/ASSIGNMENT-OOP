@@ -30,7 +30,7 @@ public class Main {
                         if (user.getUserRole().equalsIgnoreCase("admin")) {
                             adminMenu(sc);
                         } else {
-                            System.out.println("You are logged in as customer. (No customer menu implemented yet)\n");
+                            System.out.println("You are logged in as customer.\n");
                         }
                     } else {
                         System.out.println("Login failed. Try again.\n");

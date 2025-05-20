@@ -1,12 +1,12 @@
 public class Product {
-    private String proId;
-    private String proModel;
-    private String proCategory;
-    private String proName;
-    private double proCurrentPrice;
-    private double proRawPrice;
-    private double proDiscount;
-    private int proLikesCount;
+    protected String proId;
+    protected String proModel;
+    protected String proCategory;
+    protected String proName;
+    protected double proCurrentPrice;
+    protected double proRawPrice;
+    protected double proDiscount;
+    protected int proLikesCount;
 
     public Product(String proId, String proModel, String proCategory,
     String proName, double proCurrentPrice, double proRawPrice,
@@ -83,16 +83,14 @@ public class Product {
     }
     
     public String toString(){
-        return "Product {" +
-            "pro_id : " + proId + "\"" +
-            "pro_model : " + proModel + "\"" +
-            "pro_category : " + proCategory + "\"" +
-            "pro_name : " + proName + "\"" +
-            "pro_currentprice : " + proCurrentPrice + "\"" +
-            "pro_rawprice : " + proRawPrice + "\"" +
-            "pro_discount : " + proDiscount + "\"" +
-            "pro_likescount : " + proLikesCount + "\"" +
-            "}";
+        return "{\"pro_id\":\"" + getproId() + 
+                "\", \"pro_model\":\"" + getproModel() +
+                "\", \"pro_category\":\"" + getproCategory() +
+                "\", \"pro_name\":\"" + getproName() +
+                "\", \"pro_current_price\":\"" + getproCurrentPrice() +
+                "\", \"pro_raw_price\":\"" + getproRawPrice() +
+                "\", \"pro_discount\":\"" + getproDiscount() +
+                "\", \"pro_likes_count\":\"" + getproLikesCount() + "\"}";
     }
     
 

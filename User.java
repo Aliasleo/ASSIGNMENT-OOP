@@ -1,4 +1,3 @@
-import java.io.File;
 import java.text.SimpleDateFormat; // Needed for date formatting if setting current time
 import java.util.Date; // Needed for Date object
 import java.util.Locale; // Needed for SimpleDateFormat

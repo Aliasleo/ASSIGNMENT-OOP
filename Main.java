@@ -1,54 +1,93 @@
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        // Initialize the IOInterface instance
-        IOInterface ioInterface = IOInterface.getInstance();
-        
-        // Display the main menu
-        ioInterface.mainMenu();
-        
-        // Get user input for the action they want to perform
-        String[] userInput = ioInterface.getUserInput("Please select an option:", 1);
-        
-        // Process the user input
-        String action = userInput[0];
-        Scanner sc=new Scanner(System.in);
-        switch (action) {
-            case "1":
-                // Handle login
-                String[] loginInput = ioInterface.getUserInput("Please enter your username and password:", 2);
-                System.out.println("Username: " + loginInput[0]);
-                System.out.println("Password: " + loginInput[1]);
-                // Validate the inputs
-                // Check if the user exists and the password is correct
-                // If valid, proceed to the next step
-                // If invalid, show an error message
-                // For example:
-                // UserOperation userOperation = UserOperation.getInstance();
-                // if (userOperation.validateUsername(loginInput[0]) && userOperation.validatePassword(loginInput[1])) {
-                //     ioInterface.printMessage("Login successful!");
-                // } else {
-                //     ioInterface.printErrorMessage("Login failed", "Invalid username or password.");
-                // }
-                                
-                break;
-            case "2":
-                // Handle registration
-                String[] registerInput = ioInterface.getUserInput("Please enter your username, password, email, and mobile number:", 4);
-                String regUsername = registerInput[0];
-                String regPassword = registerInput[1];
-                String email = registerInput[2];
-                String mobile = registerInput[3];
-                // Validate the inputs
-                break;
-            case "3":
-                // Handle quit
-                ioInterface.printMessage("Exiting the application. Goodbye!");
-                break;
-            default:
-                ioInterface.printErrorMessage("Invalid Input", "Please select a valid option.");
-                break;
+        Scanner sc = new Scanner(System.in);
+        boolean running = true;
+
+        while (running) {
+            System.out.println("====== E-Commerce System ======");
+            System.out.println("1. Login");
+            System.out.println("2. Register");
+            System.out.println("3. Quit");
+            System.out.println("===============================");
+            System.out.print("Enter your choice: ");
+            String choice = sc.nextLine();
+
+            switch (choice) {
+                case "1":
+                    System.out.print("Enter username and password: ");
+                    String username = sc.next();
+                    String password = sc.next();
+                    sc.nextLine(); // consume newline
+
+                    // Giả lập đăng nhập admin
+                    if (username.equals("admin") && password.equals("admin123")) {
+                        System.out.println("\nLogin successful. Welcome, admin!\n");
+                        adminMenu(sc);
+                    } else {
+                        System.out.println("Login failed. Try again.\n");
+                    }
+                    break;
+                case "2":
+                    System.out.println("Register feature is not implemented yet.\n");
+                    break;
+                case "3":
+                    running = false;
+                    System.out.println("Goodbye!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Try again.\n");
+            }
         }
         sc.close();
+    }
+
+    public static void adminMenu(Scanner sc) {
+        boolean adminRunning = true;
+        while (adminRunning) {
+            System.out.println("====== Admin Menu ======");
+            System.out.println("1. Show products");
+            System.out.println("2. Add customers");
+            System.out.println("3. Show customers");
+            System.out.println("4. Show orders");
+            System.out.println("5. Generate test data");
+            System.out.println("6. Generate all statistical figures");
+            System.out.println("7. Delete all data");
+            System.out.println("8. Logout");
+            System.out.println("=======================");
+            System.out.print("Enter your choice: ");
+            String adminChoice = sc.nextLine();
+
+            switch (adminChoice) {
+                case "1":
+                    System.out.println("Show products feature.\n");
+                    break;
+                case "2":
+                    System.out.println("Add customers feature.\n");
+                    break;
+                case "3":
+                    System.out.println("Show customers feature.\n");
+                    break;
+                case "4":
+                    System.out.println("Show orders feature.\n");
+                    break;
+                case "5":
+                    System.out.println("Generate test data feature.\n");
+                    break;
+                case "6":
+                    System.out.println("Generate all statistical figures feature.\n");
+                    break;
+                case "7":
+                    System.out.println("Delete all data feature.\n");
+                    break;
+                case "8":
+                    adminRunning = false;
+                    System.out.println("Logout successful.\n");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Try again.\n");
+            }
+        }
     }
 }

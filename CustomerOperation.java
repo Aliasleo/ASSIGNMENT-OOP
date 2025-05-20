@@ -38,4 +38,12 @@ public class CustomerOperation {
         UserOperation oup
     }
 
+    public boolean validateEmail(String email) {
+        return email != null && email.contains("@");
+    }
+
+    public boolean validateMobile(String mobile) {
+        return mobile != null && mobile.matches("\\d{10}");
+    }
+
 }

@@ -1,16 +1,25 @@
 import java.util.List;
-
-public class Order {
-    private String orderId;
-    private String userId;
-    private String proId;
-    private String orderTime;
+import java.text.SimpleDateFormat; // Needed for date formatting if setting current time
+import java.util.Date; // Needed for Date object
+import java.util.Locale; // Needed for SimpleDateFormat
+public class Order extends User {
+    protected String orderId;
+    protected String userId;
+    protected String proId;
+    protected String orderTime;
 
     public Order(String orderId, String userId, String proId, String orderTime){
         this.orderId = orderId;
-        this.userId = userId;
+        this.userId = userid;
         this.proId = proId;
-        this.orderId = orderId;
+        this.orderTime = orderTime;
+    }
+    public Order() {
+        this.orderId = null;
+        this.userId = null;
+        this.proId = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY HH:mm:ss", Locale.ENGLISH);
+        this.orderTime = dateFormat.format(new Date());
     }
     private List<Product> productList;
 
@@ -52,11 +61,10 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order {" +
-        "order_id : " + orderId + "\""+
-        "user_id : " + userId + "\"" +
-        "pro_id : " + proId + "\"" +
-        "order_time" + orderTime +  "\"" +
-        "}";
+        return "{\"order_id\" :\""+ orderId +
+        "\", \"user_id\":\"" + userId +
+        "\", \"pro_id\":\"" + proId + 
+        "\", \"order_time\":\"" + orderTime + 
+        "\"}";
     }
 }

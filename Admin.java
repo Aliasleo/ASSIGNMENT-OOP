@@ -4,8 +4,11 @@ public class Admin extends User{
         
     }
     public Admin() {
-        super();
-        super.userRole = "admin";
+        userid = null;
+        userName = "Guest";
+        userPassword = null;
+        this.userRegisterTime = super.userRegisterTime;
+        this.userRole = "admin";
     }
     public String getUserId() {
         return userid;

@@ -47,6 +47,21 @@ public class UserOperation extends User {
         }
         return password.toString();
     }
+    public boolean checkUsernameExist(String userName) {
+        try (Scanner scanner = new Scanner(new File("users.txt"))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                // Tìm "user_name":"abc" trong dòng hiện tại
+                if (line.contains("\"user_name\":\"" + userName + "\"")) {
+                    return true; // Nếu tìm thấy, trả về true
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Không tìm thấy file users.txt");
+        }
+        return false; // Nếu không tìm thấy
+    }
 
     public boolean validateUsername(String userName) {
         if (userName == null) return false;
@@ -68,15 +83,30 @@ public class UserOperation extends User {
     }
 
     public User login(String userName, String userPassword) {
-        File file = new File("data/users.txt");
-
+        File file = new File("users.txt");
         if (!file.exists()) {
             System.out.println("File users.txt không tồn tại.");
             return null;
         }
-
-        // TODO: Implement actual login logic here (e.g., check username and password from file)
-        // For now, return null to satisfy return type requirement.
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (line.contains("\"user_name\":\"" + userName + "\"")) {
+                    String encryptedPassword = line.replaceAll(".*\\\"user_password\\\":\\\"(.*?)\\\".*", "$1");
+                    String decrypted = decryptedPassword(encryptedPassword);
+                    if (decrypted != null && decrypted.equals(userPassword)) {
+                        // Lấy các trường còn lại
+                        String userId = line.replaceAll(".*\\\"user_id\\\":\\\"(.*?)\\\".*", "$1");
+                        String registerTime = line.replaceAll(".*\\\"user_register_time\\\":\\\"(.*?)\\\".*", "$1");
+                        String role = line.replaceAll(".*\\\"user_role\\\":\\\"(.*?)\\\".*", "$1");
+                        // Trả về User object
+                        return new User(userId, userName, encryptedPassword, registerTime, role);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Lỗi khi đọc file users.txt: " + e.getMessage());
+        }
         return null;
     }
 }

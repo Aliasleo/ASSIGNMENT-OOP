@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,15 +18,20 @@ public class Main {
 
             switch (choice) {
                 case "1":
-                    System.out.print("Enter username and password: ");
-                    String username = sc.next();
-                    String password = sc.next();
-                    sc.nextLine(); // consume newline
+                    System.out.print("Enter username: ");
+                    String username = sc.nextLine();
+                    System.out.print("Enter password: ");
+                    String password = sc.nextLine();
 
-                    // Giả lập đăng nhập admin
-                    if (username.equals("admin") && password.equals("admin123")) {
-                        System.out.println("\nLogin successful. Welcome, admin!\n");
-                        adminMenu(sc);
+                    UserOperation userOp = UserOperation.getInstance();
+                    User user = userOp.login(username, password);
+                    if (user != null) {
+                        System.out.println("\nLogin successful. Welcome, " + user.getUserName() + "!\n");
+                        if (user.getUserRole().equalsIgnoreCase("admin")) {
+                            adminMenu(sc);
+                        } else {
+                            System.out.println("You are logged in as customer. (No customer menu implemented yet)\n");
+                        }
                     } else {
                         System.out.println("Login failed. Try again.\n");
                     }

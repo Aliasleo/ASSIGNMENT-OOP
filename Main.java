@@ -1,3 +1,4 @@
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         // Initialize the IOInterface instance
@@ -11,13 +12,25 @@ public class Main {
         
         // Process the user input
         String action = userInput[0];
+        Scanner sc=new Scanner(System.in);
         switch (action) {
             case "1":
                 // Handle login
                 String[] loginInput = ioInterface.getUserInput("Please enter your username and password:", 2);
-                String username = loginInput[0];
-                String password = loginInput[1];
-                
+                System.out.println("Username: " + loginInput[0]);
+                System.out.println("Password: " + loginInput[1]);
+                // Validate the inputs
+                // Check if the user exists and the password is correct
+                // If valid, proceed to the next step
+                // If invalid, show an error message
+                // For example:
+                // UserOperation userOperation = UserOperation.getInstance();
+                // if (userOperation.validateUsername(loginInput[0]) && userOperation.validatePassword(loginInput[1])) {
+                //     ioInterface.printMessage("Login successful!");
+                // } else {
+                //     ioInterface.printErrorMessage("Login failed", "Invalid username or password.");
+                // }
+                                
                 break;
             case "2":
                 // Handle registration
@@ -36,5 +49,6 @@ public class Main {
                 ioInterface.printErrorMessage("Invalid Input", "Please select a valid option.");
                 break;
         }
+        sc.close();
     }
 }

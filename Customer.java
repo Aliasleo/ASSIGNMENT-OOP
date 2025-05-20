@@ -7,9 +7,13 @@ public class Customer extends User {
         this.userMobile = userMobile;
     }
     public Customer() {
-        super();
-        this.userEmail = "";
-        this.userMobile = "";
+        userid = null;
+        userName = "Guest";
+        userPassword = null;
+        this.userRegisterTime = super.userRegisterTime;
+        userRole="customer";
+        this.userEmail = null;  
+        this.userMobile = null;
      }
     public String getUserEmail() {
         return userEmail;

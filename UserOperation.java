@@ -50,7 +50,7 @@ public class UserOperation extends User {
 
     public boolean validateUsername(String userName) {
         if (userName == null) return false;
-        return userName.matches("^[a-zA-Z_]{5,}$"); //bắt đầu và kết thúc bằng các ký tự a–z, A–Z, hoặc _, ít nhất 5 ký tự.
+        return userName.matches("^[a-zA-Z_]{5},$"); //bắt đầu và kết thúc bằng các ký tự a–z, A–Z, hoặc _, ít nhất 5 ký tự.
     }
 
     public boolean validatePassword(String userPassword) {

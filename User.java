@@ -1,3 +1,7 @@
+import java.io.File;
+import java.text.SimpleDateFormat; // Needed for date formatting if setting current time
+import java.util.Date; // Needed for Date object
+import java.util.Locale; // Needed for SimpleDateFormat
 public class User {
     protected String userid;
     protected String userName;
@@ -14,11 +18,13 @@ public class User {
     }
 
     public User() {
-        this.userid = "";
-        this.userName = "";
-        this.userPassword = "";
-        this.userRegisterTime = "";
+        this.userid = null;
+        this.userName = "Guest";
+        this.userPassword = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("DD-MM-YYYY HH:mm:ss", Locale.ENGLISH);
+        this.userRegisterTime = dateFormat.format(new Date());
         this.userRole = "customer";
+        
     }
      public String getUserId() {
         return userid;

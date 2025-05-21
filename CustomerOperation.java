@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class CustomerOperation {
+public class CustomerOperation extends Customer {
     private static CustomerOperation instance = null;
 
     private CustomerOperation(){}
@@ -16,26 +16,22 @@ public class CustomerOperation {
         }
         return instance;
     }
-    public boolean checkUsernameExist(String userName) {
-        try (Scanner scanner = new Scanner(new File("data/users.txt"))) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-
-                // Tìm "user_name":"abc" trong dòng hiện tại
-                if (line.contains("\"user_name\":\"" + userName + "\"")) {
-                    return true; // Nếu tìm thấy, trả về true
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.err.println("Không tìm thấy file data/users.txt");
-        }
-        return false; // Nếu không tìm thấy
-    }
-
+    
     public boolean registerCustomer( String userName, String password, String email, String mobile){
         if (!validateEmail(email)|| !validateMobile(mobile)) return false; // kiểm tra email và sdt
 
-        UserOperation oup
+        UserOperation operation = UserOperation.getInstance();
+        // You may want to add more logic here to actually register the customer
+        // For now, return true to indicate success
+        return true;
+    }
+
+    public boolean validateEmail(String email) {
+        return email != null && email.contains("@");
+    }
+
+    public boolean validateMobile(String mobile) {
+        return mobile != null && mobile.matches("\\d{10}");
     }
 
 }

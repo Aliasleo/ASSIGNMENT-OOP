@@ -1,12 +1,17 @@
 import java.util.Scanner;
-import java.io.*;
-import java.util.*;
+
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean running = true;
-
+        System.out.println("REGISTER ADMIN");
+        System.out.print("Enter username: ");
+        String userName = sc.nextLine();
+        System.out.print("Enter password: ");
+        String Password = sc.nextLine();
+        AdminOperation adminOp = AdminOperation.getInstance();
+        adminOp.registerAdmin(UserOperation.getInstance().generateUniqueUserId(),userName, Password);
         while (running) {
             System.out.println("====== E-Commerce System ======");
             System.out.println("1. Login");
@@ -37,7 +42,43 @@ public class Main {
                     }
                     break;
                 case "2":
-                    System.out.println("Register feature is not implemented yet.\n");
+                    UserOperation userOpReg = UserOperation.getInstance();
+                    String newUserId = userOpReg.generateUniqueUserId();
+
+                    System.out.print("Enter new username: ");
+                    String newUsername = sc.nextLine();
+                    System.out.print("Enter new password: ");
+                    String newPassword = sc.nextLine();
+
+                    // Kiểm tra hợp lệ
+                    if (!userOpReg.validateUsername(newUsername)) {
+                        System.out.println("Invalid username. Username must be at least 5 characters, only letters and underscores.\n");
+                        break;
+                    }
+                    if (!userOpReg.validatePassword(newPassword)) {
+                        System.out.println("Invalid password. Password must be at least 5 characters, include both letters and digits.\n");
+                        break;
+                    }
+                    if (userOpReg.checkUsernameExist(newUsername)) {
+                        System.out.println("Username already exists. Please choose another one.\n");
+                        break;
+                    }
+
+                    String encryptedPassword = userOpReg.encryptPassword(newPassword);
+                    String registerTime = new java.text.SimpleDateFormat("dd-MM-yyyy_HH:mm:ss").format(new java.util.Date());
+                    String role = "customer";
+
+                    // Lưu vào file users.txt
+                    try (java.io.FileWriter fw = new java.io.FileWriter("users.txt", true)) {
+                        String userJson = String.format(
+                            "{\"user_id\":\"%s\",\"user_name\":\"%s\",\"user_password\":\"%s\",\"user_register_time\":\"%s\",\"user_role\":\"%s\"}\n",
+                            newUserId, newUsername, encryptedPassword, registerTime, role
+                        );
+                        fw.write(userJson);
+                        System.out.println("Register successful! You can now login.\n");
+                    } catch (Exception e) {
+                        System.out.println("Error writing to users.txt: " + e.getMessage());
+                    }
                     break;
                 case "3":
                     running = false;

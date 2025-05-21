@@ -18,35 +18,35 @@ public class UserOperation extends User {
     }
     
     public String encryptPassword(String userPassword) {
-        String chars = "abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        StringBuilder randomStr = new StringBuilder(); 
+        if (userPassword == null) return null;
+        String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder randomStr = new StringBuilder();
         Random rand = new Random();
-
-        while (randomStr.length() < userPassword.length()*2){
+        int len = userPassword.length();
+        for (int i = 0; i < len * 2; i++) {
             randomStr.append(chars.charAt(rand.nextInt(chars.length())));
         }
-
-        StringBuilder encrypted = new StringBuilder("^^"); //bat dau
-        for (int i=0;i< userPassword.length();i++){
-            encrypted.append(randomStr.charAt(i*2)); // random dau tien
-            encrypted.append(randomStr.charAt(i*2+1)); // random thu 2
-            encrypted.append(randomStr.charAt(i)); // mk
+        StringBuilder encrypted = new StringBuilder("^^");
+        for (int i = 0; i < len; i++) {
+            encrypted.append(randomStr.charAt(i * 2));
+            encrypted.append(randomStr.charAt(i * 2 + 1));
+            encrypted.append(userPassword.charAt(i));
         }
-        encrypted.append("$$"); // ket thuc
+        encrypted.append("$$");
         return encrypted.toString();
     }
 
 
-    public String decryptedPassword (String encryptedPassword){
-        if (!encryptedPassword.startsWith("^^") || !encryptedPassword.endsWith("$$")) return null;
+    public String decryptPassword(String encryptedPassword) {
+        if (encryptedPassword == null || !encryptedPassword.startsWith("^^") || !encryptedPassword.endsWith("$$")) return null;
         String core = encryptedPassword.substring(2, encryptedPassword.length() - 2);
         StringBuilder password = new StringBuilder();
-
-        for(int i=0;i<core.length();i+=3){
-            password.append(core.charAt(i+2)); //lay dung ky tu goc cua user
+        for (int i = 0; i < core.length(); i += 3) {
+            password.append(core.charAt(i + 2));
         }
         return password.toString();
     }
+
     public boolean checkUsernameExist(String userName) {
         try (Scanner scanner = new Scanner(new File("users.txt"))) {
             while (scanner.hasNextLine()) {
@@ -64,8 +64,22 @@ public class UserOperation extends User {
     }
 
     public boolean validateUsername(String userName) {
-        if (userName == null) return false;
-        return userName.matches("^[a-zA-Z_]{5},$"); //bắt đầu và kết thúc bằng các ký tự a–z, A–Z, hoặc _, ít nhất 5 ký tự.
+        // Rule 1: Check for null or empty string
+        if (userName == null || userName.trim().isEmpty()) {
+            System.out.println("Username validation failed: Username is null or empty.");
+            return false;
+        }
+
+        // Rule 2: Check length (at least 5 characters)
+        if (userName.length() < 5) {
+            System.out.println("Username validation failed: Length is less than 5 characters. Current length: " + userName.length());
+            return false;
+        }
+        if (!userName.matches("^[a-zA-Z_]+$")) {
+            System.out.println("Username validation failed: Contains invalid characters. Only letters and underscores are allowed.");
+            return false;
+        }
+        return true; // All validation rules passed
     }
 
     public boolean validatePassword(String userPassword) {
@@ -93,7 +107,9 @@ public class UserOperation extends User {
                 String line = scanner.nextLine();
                 if (line.contains("\"user_name\":\"" + userName + "\"")) {
                     String encryptedPassword = line.replaceAll(".*\\\"user_password\\\":\\\"(.*?)\\\".*", "$1");
-                    String decrypted = decryptedPassword(encryptedPassword);
+                    System.out.println("Encrypted password: " + encryptedPassword);
+                    String decrypted = decryptPassword(encryptedPassword);
+                    System.out.println("Decrypted password: " + decrypted);
                     if (decrypted != null && decrypted.equals(userPassword)) {
                         // Lấy các trường còn lại
                         String userId = line.replaceAll(".*\\\"user_id\\\":\\\"(.*?)\\\".*", "$1");

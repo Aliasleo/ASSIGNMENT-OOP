@@ -35,7 +35,7 @@ public class Main {
                         if (user.getUserRole().equalsIgnoreCase("admin")) {
                             adminMenu(sc);
                         } else {
-                            System.out.println("You are logged in as customer.\n");
+                            customerMenu(sc);
                         }
                     } else {
                         System.out.println("Login failed. Try again.\n");
@@ -131,6 +131,45 @@ public class Main {
                     break;
                 case "8":
                     adminRunning = false;
+                    System.out.println("Logout successful.\n");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Try again.\n");
+            }
+        }
+    }
+    public static void customerMenu(Scanner sc) {
+        boolean customerRunning = true;
+        while (customerRunning) {
+            System.out.println("====== Customer Menu ======");
+            System.out.println("1. Show profile");
+            System.out.println("2. Update profile");
+            System.out.println("3. Show products");
+            System.out.println("4. Show history orders");
+            System.out.println("5. Generate all consumption figures");
+            System.out.println("6. Logout");
+            System.out.println("===========================");
+            System.out.print("Enter your choice: ");
+            String customerChoice = sc.nextLine();
+
+            switch (customerChoice) {
+                case "1":
+                    System.out.println("Show profile feature.\n");
+                    break;
+                case "2":
+                    System.out.println("Update profile feature.\n");
+                    break;
+                case "3":
+                    System.out.println("Show products feature.\n");
+                    break;
+                case "4":
+                    System.out.println("Show history orders feature.\n");
+                    break;
+                case "5":
+                    System.out.println("Generate all consumption figures feature.\n");
+                    break;
+                case "6":
+                    customerRunning = false;
                     System.out.println("Logout successful.\n");
                     break;
                 default:

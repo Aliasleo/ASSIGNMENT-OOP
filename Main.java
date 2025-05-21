@@ -109,7 +109,7 @@ public class Main {
 
             switch (adminChoice) {
                 case "1":
-                    System.out.println("Show products feature.\n");
+                    System.out.println("\n" );
                     break;
                 case "2":
                     System.out.println("Add customers feature.\n");
